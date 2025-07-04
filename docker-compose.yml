@@ -1,0 +1,27 @@
+services:
+ MySQLRapiTech:
+  image: mysql:8.0
+  restart: always
+  environment:
+   MYSQL_ROOT_PASSWORD: root
+   MYSQL_DATABASE: minha_base
+   MYSQL_USER: usuario
+   MYSQL_PASSWORD: senha123
+  ports:
+   - "3306:3306"
+  volumes:
+   - mysql_data:/var/lib/mysql
+
+ phpmyadminRapiTech:
+  image: phpmyadmin/phpmyadmin
+  restart: always
+  environment:
+   PMA_HOST: MySQLRapiTech
+   PMA_PORT: 3306
+  ports:
+   - "8080:80"
+  depends_on:
+   - MySQLRapiTech
+
+volumes:
+ mysql_data:
