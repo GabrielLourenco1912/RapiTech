@@ -12,7 +12,22 @@ class NotificacaoController extends Controller
      */
     public function index()
     {
-        //
+        $id =  auth()->id();
+        $notificacoes = Notificacao::where('destinatario_id', $id)
+        ->latest()
+        ->get();
+        return view('notificacao.index', compact('id', 'notificacoes'));
+    }
+
+    public function marcarComoLida(Notificacao $notificacao)
+    {
+        if ($notificacao->destinatario_id !== auth()->id()) {
+            abort(403, 'Ação não autorizada.');
+        }
+
+        $notificacao->update(['read_at' => now()]);
+
+        return back()->with('success', 'Notificação marcada como lida!');
     }
 
     /**
@@ -60,6 +75,12 @@ class NotificacaoController extends Controller
      */
     public function destroy(Notificacao $notificacao)
     {
-        //
+        if ($notificacao->destinatario_id !== auth()->id()) {
+            abort(403, 'Ação não autorizada.');
+        }
+
+        $notificacao->delete();
+
+        return back()->with('success', 'Notificação apagada com sucesso!');
     }
 }

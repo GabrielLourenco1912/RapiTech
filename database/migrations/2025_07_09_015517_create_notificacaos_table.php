@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('notificacaos', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->foreignId('enviador_id')->constrained('users');
             $table->foreignId('proposta_id')->constrained('propostas');
             $table->foreignId('destinatario_id')->constrained('users');
             $table->foreignId('status_id')->constrained('status');
+            $table->timestamp('read_at')->nullable();
             $table->text('descricao');
+
             $table->timestamps();
             $table->softDeletes();
         });

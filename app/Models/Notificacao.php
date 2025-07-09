@@ -3,19 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Notificacao extends Model
 {
     use softDeletes;
 
-    protected $table = 'notificacaoss';
+    protected $table = 'notificacaos';
+
+    protected $casts = [
+        'read_at' => 'datetime',
+    ];
 
     protected $fillable =
         [
             'titulo',
-            'enviador_id',
             'proposta_id',
-            'status_is'.
+            'status_id',
+            'read_at',
             'destinatario_id',
             'descricao',
         ];

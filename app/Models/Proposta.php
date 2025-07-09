@@ -12,6 +12,7 @@ class Proposta extends Model
 
     protected $fillable =
         [
+            'solicitante_id',
             'recebedor_id',
             'enviador_id',
             'titulo',
@@ -21,6 +22,10 @@ class Proposta extends Model
             'status_id',
         ];
 
+    public function solicitante()
+    {
+        return $this->belongsTo(User::class, 'solicitante_id');
+    }
     public function recebedor()
     {
         return $this->belongsTo(User::class, 'recebedor_id');
@@ -31,7 +36,7 @@ class Proposta extends Model
     }
     public function tipo()
     {
-        return $this->belongsTo(Tipo::class, 'tipo_id');
+        return $this->belongsTo(Tipo_proposta::class, 'tipo_id');
     }
     public function status()
     {

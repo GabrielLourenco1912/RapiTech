@@ -19,6 +19,10 @@ class StatusSeeder extends Seeder
                 'segmento' => 'proposta',
             ],
             [
+                'nome' => 'Recusada',
+                'segmento' => 'proposta',
+            ],
+            [
                 'nome' => 'Aceita',
                 'segmento' => 'proposta',
             ],

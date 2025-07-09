@@ -18,7 +18,7 @@
                     </div>
                 </a>
 
-                <a href="{{-- route('tasks.index') --}}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <a href="{{ route('notificacao.index') }}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                     <div class="h-48 flex items-center justify-center bg-slate-50">
                         <img class="h-48 text-slate-500" src="{{ asset('img/notificacao.svg') }}" alt="Ilustração de notificações">
                     </div>
@@ -42,7 +42,7 @@
                     </div>
                 </a>
 
-                <a href="{{-- route('tasks.index') --}}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <a href="{{ route('proposta.index') }}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                     <div class="h-48 flex items-center justify-center bg-slate-50">
                         <img class="h-48 text-slate-500" src="{{ asset('img/proposta.svg') }}" alt="Ilustração de notificações">
                     </div>
@@ -54,7 +54,7 @@
                     </div>
                 </a>
 
-                <a href="{{-- route('tasks.index') --}}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <a href="{{ route('servico.index') }}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                     <div class="h-48 flex items-center justify-center bg-slate-50">
                         <img class="h-48 text-slate-500" src="{{ asset('img/servico.svg') }}" alt="Ilustração de notificações">
                     </div>

@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('propostas', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('solicitante_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('recebedor_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('enviador_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->string('titulo');
