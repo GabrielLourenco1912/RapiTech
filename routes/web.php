@@ -5,11 +5,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->middleware('guest')->name('welcome');
+
+Route::middleware(['auth' , 'checkrole:1'])->group(function () {
+    Route::get('/dashboard_admin', function () {
+        return view('dashboard.admin');
+    })->name('dashboard_admin');
+});
+Route::middleware(['auth' , 'checkrole:2'])->group(function () {
+    Route::get('/dashboard_dev', function () {
+        return view('dashboard.dev');
+    })->name('dashboard_dev');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth' , 'checkrole:3'])->group(function () {
+    Route::get('/dashboard_cliente', function () {
+        return view('dashboard.cliente');
+    })->name('dashboard_cliente');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

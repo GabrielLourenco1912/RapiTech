@@ -12,15 +12,33 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+    Route::get('register_dev', [RegisteredUserController::class, 'create_dev'])
+        ->name('register_dev');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('register_dev', [RegisteredUserController::class, 'store'])
+        ->name('register_dev_post');
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
 
-    Route::post('login', [AuthenticatedSessionController::class, 'store']);
+    Route::get('register_cliente', [RegisteredUserController::class, 'create_cliente'])
+        ->name('register_cliente');
+
+    Route::post('register_cliente', [RegisteredUserController::class, 'store'])
+        ->name('register_cliente_post');
+
+    Route::get('login_admin', [AuthenticatedSessionController::class, 'create_admin'])
+        ->name('login_admin');
+
+    Route::post('login_admin', [AuthenticatedSessionController::class, 'store']);
+
+    Route::get('login_dev', [AuthenticatedSessionController::class, 'create_dev'])
+        ->name('login_dev');
+
+    Route::post('login_dev', [AuthenticatedSessionController::class, 'store']);
+
+    Route::get('login_cliente', [AuthenticatedSessionController::class, 'create_cliente'])
+        ->name('login_cliente');
+
+    Route::post('login_cliente', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');

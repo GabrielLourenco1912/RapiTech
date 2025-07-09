@@ -15,6 +15,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('escopo_id')->references('id')->on('escopos')->onDelete('cascade')->onUpdate('cascade');
             $table->primary(['user_id', 'escopo_id']);
+            $table->softDeletes();
         });
     }
 

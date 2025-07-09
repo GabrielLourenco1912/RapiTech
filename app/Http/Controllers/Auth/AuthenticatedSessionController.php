@@ -14,9 +14,17 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    public function create_admin(): View
     {
-        return view('auth.login');
+        return view('auth.login_admin');
+    }
+    public function create_dev(): View
+    {
+        return view('auth.login_dev');
+    }
+    public function create_cliente(): View
+    {
+        return view('auth.login_cliente');
     }
 
     /**
@@ -28,7 +36,14 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+
+        if(auth()->user()->role_id == '1') {
+            return redirect()->intended(route('dashboard_admin', absolute: false));
+        } elseif (auth()->user()->role_id == '2') {
+            return redirect()->intended(route('dashboard_dev', absolute: false));
+        } else {
+            return redirect()->intended(route('dashboard_cliente', absolute: false));
+        }
     }
 
     /**

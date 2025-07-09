@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('dev_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('proposta_id')->references('id')->on('propostas')->onDelete('cascade')->onUpdate('cascade');
             $table->string('titulo');
-            $table->string('descricao');
+            $table->text('descricao');
             $table->foreignId('status_id')->references('id')->on('status')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('pagamento_id')->references('id')->on('pagamentos')->onDelete('cascade')->onUpdate('cascade');
             $table->double('valor');
