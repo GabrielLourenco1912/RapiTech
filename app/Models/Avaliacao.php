@@ -22,7 +22,7 @@ class Avaliacao extends Model
 
     public function servico()
     {
-        return $this->belongsTo(Servico::class);
+        return $this->belongsTo(Servico::class, 'servico_id');
     }
     public function destinatario()
     {

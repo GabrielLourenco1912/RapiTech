@@ -9,15 +9,29 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-8 space-y-6">
+                    @if (session('success'))
+                        <div class="p-4 rounded-md bg-green-100 border border-green-300 text-green-800">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="p-4 rounded-md bg-red-100 border border-red-300 text-red-800">
+                            {{ session('error') }}
+                        </div>
+                    @endif
 
                     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start">
-                        <h3 class="text-3xl font-bold text-gray-900 mb-2 sm:mb-0">{{ $servico->titulo }}</h3>
+                        <h3 class="text-3xl font-bold text-gray-900 mb-2 sm:mb-0">
+                            {{ $servico->titulo }}
+                        </h3>
                         @if ($servico->status)
                             <span class="text-sm font-medium px-3 py-1 rounded-full {{ $servico->status->cor_associada ?? 'bg-gray-200 text-gray-800' }}">
                                 {{ $servico->status->nome }}
                             </span>
                         @endif
                     </div>
+
                     <div class="border-t grid grid-cols-1 md:grid-cols-2 gap-6 pt-6">
                         <div>
                             <p class="text-sm font-medium text-gray-500">Valor Acordado</p>
@@ -28,6 +42,7 @@
                             <p class="text-lg text-gray-800">{{ $servico->created_at->format('d/m/Y') }}</p>
                         </div>
                     </div>
+
                     <div class="border-t pt-6">
                         <h4 class="text-lg font-semibold text-gray-800 mb-3">Participantes</h4>
                         <div class="space-y-2">
@@ -35,6 +50,7 @@
                             <p><strong>Desenvolvedor:</strong> {{ $servico->dev->name ?? 'Não definido' }}</p>
                         </div>
                     </div>
+
                     <div class="border-t pt-6">
                         <h4 class="text-lg font-semibold text-gray-800 mb-2">Descrição do Serviço</h4>
                         <div class="prose max-w-none text-gray-700">
@@ -42,31 +58,39 @@
                         </div>
                     </div>
 
-
-                    <div class="border-t pt-6">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-4">Ações do Projeto</h4>
-                        <div class="flex flex-wrap gap-4">
-                            <form action="{{ route('servico.concluir', $servico) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja marcar este serviço como concluído?');">
-                                @csrf
-                                @method('PATCH')
-                                <x-primary-button class="bg-green-600 hover:bg-green-700">
-                                    Marcar como Concluído
-                                </x-primary-button>
-                            </form>
-
-                            <form action="{{ route('servico.cancelar', $servico) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja cancelar este serviço? Esta ação não pode ser desfeita.');">
-                                @csrf
-                                @method('PATCH')
-                                <x-danger-button>
-                                    Cancelar Serviço
-                                </x-danger-button>
-                            </form>
+                    @if($servico->status->id !== 6 && $servico->status->id  !== 7)
+                        <div class="border-t pt-6">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Ações do Projeto</h4>
+                            <div class="flex flex-wrap gap-4">
+                                <form action="{{ route('servico.concluir', $servico) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja marcar este serviço como concluído?');">
+                                    @csrf
+                                    @method('PATCH')
+                                    <x-primary-button class="bg-green-600 hover:bg-green-700">
+                                        Marcar como Concluído
+                                    </x-primary-button>
+                                </form>
+                                <form action="{{ route('servico.cancelar', $servico) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja cancelar este serviço? Esta ação não pode ser desfeita.');">
+                                    @csrf
+                                    @method('PATCH')
+                                    <x-danger-button>
+                                        Cancelar Serviço
+                                    </x-danger-button>
+                                </form>
+                            </div>
                         </div>
-                    </div>
-
+                    @elseif( auth()->user()->role_id === 3 && $servico->avaliacao === null)
+                        <div class="border-t pt-6">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-4">Ações do Projeto</h4>
+                            <div class="flex flex-wrap gap-4">
+                                <a href="{{ route('avaliacao.create', $servico) }}"
+                                   class="inline-flex items-center justify-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                                    Avaliar
+                                </a>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
-
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-8">

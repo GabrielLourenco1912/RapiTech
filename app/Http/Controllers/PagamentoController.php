@@ -75,8 +75,8 @@ class PagamentoController extends Controller
             ]);
 
             Notificacao::create([
-                'titulo'          => 'Proposta foi paga ' . $proposta->titulo . '".',
-                'descricao'       => 'Parabéns! A sua proposta foi paga ' . $proposta->titulo . '".',
+                'titulo'          => 'Proposta foi paga ' . $proposta->titulo . '.',
+                'descricao'       => 'Parabéns! A sua proposta foi paga ' . $proposta->titulo . '.',
                 'proposta_id'     => $proposta->id,
                 'destinatario_id' => $proposta->recebedor_id,
                 'status_id'       => 1,
@@ -121,8 +121,8 @@ class PagamentoController extends Controller
         $proposta = Proposta::find($request->query('proposta'));
 
         Notificacao::create([
-            'titulo'          => 'Pagamento recusad ' . $proposta->titulo . '".',
-            'descricao'       => 'O pagamento da sua proposta foi recusado ' . $proposta->titulo . '".',
+            'titulo'          => 'Pagamento recusad ' . $proposta->titulo . '.',
+            'descricao'       => 'O pagamento da sua proposta foi recusado ' . $proposta->titulo . '.',
             'proposta_id'     => $proposta->id,
             'destinatario_id' => $proposta->solicitante_id,
             'status_id'       => 1,

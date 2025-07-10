@@ -36,7 +36,6 @@ class ServicoController extends Controller
      */
     public function updateRelatorio(Request $request, Servico $servico): RedirectResponse
     {
-        // 1. Autorização
         if (auth()->id() !== $servico->cliente_id && auth()->id() !== $servico->dev_id) {
             abort(403);
         }
@@ -61,17 +60,14 @@ class ServicoController extends Controller
      */
     public function downloadRelatorio(Servico $servico): StreamedResponse
     {
-        // 1. Autorização
         if (auth()->id() !== $servico->cliente_id && auth()->id() !== $servico->dev_id) {
             abort(403);
         }
 
-        // 2. Verificação de existência
         if (!$servico->path_relatorio || !Storage::disk('public')->exists($servico->path_relatorio)) {
             abort(404, 'Arquivo de relatório não encontrado.');
         }
 
-        // 3. Retorna o arquivo para download
         return Storage::disk('public')->download($servico->path_relatorio);
     }
     /**
@@ -138,7 +134,7 @@ class ServicoController extends Controller
     public function show(Servico $servico)
     {
 
-        $servico->load('cliente', 'dev', 'status');
+        $servico->load('cliente', 'dev', 'status', 'avaliacao');
 
         if (auth()->id() !== $servico->cliente_id && auth()->id() !== $servico->dev_id) {
             abort(403);

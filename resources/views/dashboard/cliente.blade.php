@@ -6,7 +6,7 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                <a href="{{-- route('tasks.index') --}}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <a href="{{ route('profile.index') }}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                     <div class="h-48 flex items-center justify-center bg-slate-50">
                         <img class="h-46 text-slate-500" src="{{ asset('img/logo_perfil.png') }}" alt="Ilustração de dev">
                     </div>
@@ -30,7 +30,7 @@
                     </div>
                 </a>
 
-                <a href="{{-- route('tasks.index') --}}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                <a href="{{ route('avaliacao.index') }}" class="group block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
                     <div class="h-48 flex items-center justify-center bg-slate-50">
                         <img class="h-48 text-slate-500" src="{{ asset('img/avaliacao.svg') }}" alt="Ilustração de notificações">
                     </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AvaliacaoController;
 use App\Http\Controllers\NotificacaoController;
 use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\ProfileController;
@@ -34,9 +35,13 @@ Route::middleware(['auth' , 'checkrole:3'])->group(function () {
     Route::get('/pagamento/sucesso', [PagamentoController::class, 'sucesso'])->name('pagamento.sucesso');
     Route::get('/pagamento/cancelado', [PagamentoController::class, 'cancelado'])->name('pagamento.cancelado');
 
+    Route::get('/avaliacao/{servico}/create', [AvaliacaoController::class, 'create'])->name('avaliacao.create');
+    Route::post('/avaliacao/{servico}/store', [AvaliacaoController::class, 'store'])->name('avaliacao.store');
 });
 
 Route::middleware(['auth' , 'checkrole:3.2'])->group(function () {
+    Route::get('/avaliacao', [AvaliacaoController::class, 'index'])->name('avaliacao.index');
+
     Route::get('/notificacao', [NotificacaoController::class, 'index'])->name('notificacao.index');
     Route::patch('/notificacoes/{notificacao}/ler', [NotificacaoController::class, 'marcarComoLida'])->name('notificacao.read');
     Route::delete('/notificacoes/{notificacao}', [NotificacaoController::class, 'destroy'])->name('notificacao.destroy');
@@ -60,6 +65,9 @@ Route::middleware(['auth' , 'checkrole:3.2'])->group(function () {
 
     Route::get('/servicos/{servico}/relatorio/download', [ServicoController::class, 'downloadRelatorio'])
         ->name('servico.relatorio.download');
+
+    Route::get('/profile/index', [ProfileController::class, 'index'])->name('profile.index');
+    Route::post('/profile/index', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
 });
 
 Route::middleware('auth')->group(function () {

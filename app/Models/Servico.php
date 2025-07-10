@@ -28,24 +28,34 @@ class Servico extends Model
     {
         return $this->belongsTo(User::class, 'dev_id');
     }
+
     public function cliente()
     {
         return $this->belongsTo(User::class, 'cliente_id');
     }
+
     public function status()
     {
         return $this->belongsTo(Status::class, 'status_id');
     }
+
     public function escopo()
     {
         return $this->belongsToMany(Escopo::class, 'escopo_proposta');
     }
+
     public function proposta()
     {
         return $this->belongsTo(Proposta::class, 'proposta_id');
     }
+
     public function pagamento()
     {
         return $this->belongsTo(Pagamento::class, 'pagamento_id');
+    }
+
+    public function avaliacao()
+    {
+        return $this->hasOne(Avaliacao::class, 'servico_id');
     }
 }
